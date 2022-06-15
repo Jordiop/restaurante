@@ -12,24 +12,7 @@ public class MyTask {
 	static ArrayList <Pedido> listaPedidos = new ArrayList<Pedido>();
 	public static int numerador = 0;
 	
-	public static void cargarPlatos () throws IOException {
-		try {
-		    ArrayList<String> lines = new ArrayList<>(Files.readAllLines(Paths.get("C:\\Users\\jordi\\eclipse-workspace\\Examen\\src\\core\\platos.txt")));
-		    for (int i = 0; i < lines.size(); i++) {
-		    	String a = lines.get(i);
-		    	String [] pasador = a.split(";");
-		    	Plato plato = new Plato (pasador[0], Integer.parseInt(pasador[1]));
-		    	listaPlatos.add(plato);
-			}
-		    for (int x = 0; x < listaPlatos.size(); x++) {
-		    	System.out.println(listaPlatos.get(x));
-		    }
-		}
-		catch (IOException e) {
-		    System.out.println(e);
-		}
-		
-	}
+	
 	
 	public static void main (String [] args) throws IOException {
 		Camarer camarer = new Camarer("Jordi ");
@@ -41,8 +24,9 @@ public class MyTask {
 		
 		Scanner teclat = new Scanner (System.in);
 		System.out.println("Cargando platos");
-		cargarPlatos();
+		Plato.cargarPlatos();
 		System.out.println("Platos cargados");
+		
 		System.out.println("Introduce tu ID");
 		int identifier = teclat.nextInt();
 		
@@ -80,6 +64,7 @@ public class MyTask {
 							Persona.verPendientes();
 							break;
 						case 6:
+							Persona.calcularCaja();
 							break;
 						case 7:
 							menu = false;

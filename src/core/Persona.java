@@ -54,17 +54,24 @@ public abstract class Persona {
 		}
 	}
 	
-	public void calcularCaja() {
-		for (int i = 0; i < MyTask.listaPedidos.size(); i++) {
-				for (int x = 0; x < MyTask.listaPedidos.get(i).getLineasPedido().size(); x++) {
-					int a = 0;
-					int b = (int) ((LineaPedido) MyTask.listaPedidos.get(i).getLineasPedido().get(x)).getPlato().getPrecio();
-					int c = (int) ((LineaPedido) MyTask.listaPedidos.get(i).getLineasPedido().get(x)).getCantidad();
-					int d = b * c;
-					a = a + d;
+	public static void calcularCaja() {
+		int total = 0;
+		for (int o = 0; o < MyTask.listaPlatos.size(); o++) {
+			for (int i = 0; i < MyTask.listaPedidos.size(); i++) {
+				if (o == MyTask.listaPedidos.get(i).getId()) {
+					for (int x = 0; x < MyTask.listaPedidos.get(i).getLineasPedido().size(); x++) {
+						int b = (int) ((LineaPedido) MyTask.listaPedidos.get(i).getLineasPedido().get(x)).getPlato().getPrecio();
+						int c = (int) ((LineaPedido) MyTask.listaPedidos.get(i).getLineasPedido().get(x)).getCantidad();
+						int d = b * c;
+						total = total + d;
+					}	
 				}
 			}
 		}
+		System.out.println("Total de caja: "+total);
+	}
+	
+	public abstract void actuar();
 	}
 	
 	

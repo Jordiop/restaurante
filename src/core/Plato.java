@@ -1,5 +1,10 @@
 package core;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
 public class Plato {
 	private int id;
 	private String nombre;
@@ -48,10 +53,46 @@ public class Plato {
 		return "Plato [id=" + id + ", nombre=" + nombre + ", precio=" + precio + "]";
 	}
 	
-	public void cargarPlatos () {
+	public static void cargarPlatos () throws IOException {
+		try {
+		    ArrayList<String> lines = new ArrayList<>(Files.readAllLines(Paths.get("C:\\Users\\jordi\\eclipse-workspace\\Examen\\src\\core\\platos.txt")));
+		    for (int i = 0; i < lines.size(); i++) {
+		    	boolean comprobante = false;
+		    	String a = lines.get(i);
+		    	String [] pasador = a.split(";");
+		    	// Comprobar que no se repitan platos
+		    	if (i == 0) {
+		    		Plato plato = new Plato (pasador[0], Float.parseFloat(pasador[1]));
+				    MyTask.listaPlatos.add(plato);
+		    	} else {
+		    		while (comprobante == false) {
+			    		for (int j = 0; j < MyTask.listaPlatos.size(); j++) {
+			    			if (MyTask.listaPlatos.get(j).getNombre().equals(pasador[0])) {
+			    				MyTask.listaPlatos.get(j).setPrecio(Float.parseFloat(pasador[1]));
+			    				comprobante = true;
+			    				break;
+			    			}	
+		    			}
+			    		if (comprobante == false) {
+				    		Plato plato = new Plato (pasador[0], Float.parseFloat(pasador[1]));
+						    MyTask.listaPlatos.add(plato);
+						    break;
+			    		}
+					    }
+		    		}
+		    	}
+		    	
+		    
+		
+		    for (int x = 0; x < MyTask.listaPlatos.size(); x++) {
+		    	System.out.println(MyTask.listaPlatos.get(x));
+		    }
+		}
+		catch (IOException e) {
+		    System.out.println(e);
+		}
 		
 	}
-	
 	
 	
 	

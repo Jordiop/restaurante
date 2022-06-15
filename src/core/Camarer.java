@@ -102,18 +102,18 @@ public class Camarer extends Persona{
 		Scanner teclat = new Scanner (System.in);
 		System.out.println("Dame el id del pedido");
 		int id = teclat.nextInt();
+		int a = 0;
 		for (int i = 0; i < MyTask.listaPedidos.size(); i++) {
 			if (id == MyTask.listaPedidos.get(i).getId()) {
 				for (int x = 0; x < MyTask.listaPedidos.get(i).getLineasPedido().size(); x++) {
-					int a = 0;
 					int b = (int) ((LineaPedido) MyTask.listaPedidos.get(i).getLineasPedido().get(x)).getPlato().getPrecio();
 					int c = (int) ((LineaPedido) MyTask.listaPedidos.get(i).getLineasPedido().get(x)).getCantidad();
 					int d = b * c;
 					a = a + d;
-					System.out.println("Precio total: " + a);
 				}	
 			}
 		}
+		System.out.println("El precio total es: "+a);
 	}
 	
 }
